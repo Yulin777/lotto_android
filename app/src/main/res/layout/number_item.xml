@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top|center_horizontal">
+
+    <TextView
+        android:id="@+id/index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textColor="#f55"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:id="@+id/box"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="10dp"-->
+<!--        app:strokeColor="@color/red"-->
+<!--        app:strokeWidth="20dp"-->
+<!--        app:cardCornerRadius="3dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/index" />-->
+    <!--
+    <androidx.cardview.widget.CardView
+        android:layout_width="20dp"
+        android:layout_height="10dp"
+        app:cardBackgroundColor="#f00"
+        app:cardCornerRadius="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/index">
+-->
+        <ImageView
+            android:id="@+id/box"
+            android:layout_width="20dp"
+            android:layout_height="10dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/empty_box"
+            android:tag="false"
+            tools:ignore="ContentDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/index"/>
+<!--    </androidx.cardview.widget.CardView>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
