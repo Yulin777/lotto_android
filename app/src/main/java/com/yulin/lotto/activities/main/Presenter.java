@@ -31,10 +31,18 @@ public class Presenter {
 
     public void setViews() {
         setTable();
-        setDraw();
+        setDrawBtn();
+        setFilterBtn();
     }
 
-    private void setDraw() {
+    private void setFilterBtn() {
+        Button filterBtn = mView.getFilterBtn();
+        filterBtn.setOnClickListener(v -> {
+            mView.openFilterDrawer();
+        });
+    }
+
+    private void setDrawBtn() {
         Button drawBtn = mView.getDrawBtn();
         drawBtn.setOnClickListener(v -> {
             List<Boolean> numbers = new ArrayList<>(Collections.nCopies(37, false));

@@ -1,31 +1,54 @@
 package com.yulin.lotto.activities.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.GridView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.yulin.lotto.R;
+import com.yulin.lotto.activities.main.fragments.FilterFragment;
 
 interface IMainView {
     RecyclerView getTable();
 
     Button getDrawBtn();
+
+    Button getFilterBtn();
+
+    void openFilterDrawer();
 }
 
 public class MainActivity extends AppCompatActivity implements IMainView {
     Presenter mPresenter;
     private RecyclerView table;
     private Button drawBtn;
+    private Button filterBtn;
+    private DrawerLayout drawerLayout;
+    private NavigationView filterDrawer;
+
+    @Override
+    public Button getFilterBtn() {
+        return filterBtn;
+    }
+
+    @Override
+    public void openFilterDrawer() {
+        drawerLayout.openDrawer(filterDrawer);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.filter_drawer_container, new FilterFragment())
+                .commit();
 
         mPresenter = new Presenter(this);
         findViews();
@@ -34,7 +57,10 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     private void findViews() {
         this.table = findViewById(R.id.table);
-        this.drawBtn = findViewById(R.id.draw);
+        this.drawBtn = findViewById(R.id.draw_btn);
+        this.filterBtn = findViewById(R.id.filter_btn);
+        this.drawerLayout = findViewById(R.id.drawer_layout);
+        this.filterDrawer = findViewById(R.id.filter_drawer);
     }
 
     @Override

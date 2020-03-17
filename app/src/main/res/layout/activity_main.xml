@@ -1,30 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    tools:context=".activities.main.MainActivity">
+    android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/table"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fcc"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="40"
-        tools:listitem="@layout/number_item" />
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/draw"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:text="הגרל מחדש"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/table" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fcc"
+            android:paddingStart="10dp"
+            android:paddingBottom="10dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="40"
+            tools:listitem="@layout/number_item" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/draw_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="הגרל מחדש"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/table" />
+
+        <Button
+            android:id="@+id/filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="שפר סיכויים"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/draw_btn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include layout="@layout/filter_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
+

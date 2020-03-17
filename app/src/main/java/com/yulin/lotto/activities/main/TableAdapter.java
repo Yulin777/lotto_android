@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Yulin. I on 16,March,2020
  */
-class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
+public class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
     private List<Boolean> choiceList = new ArrayList<>(Collections.nCopies(40, false));
 
     @NonNull

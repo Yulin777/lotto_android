@@ -16,26 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <com.google.android.material.card.MaterialCardView-->
-<!--        android:id="@+id/box"-->
-<!--        android:layout_width="20dp"-->
-<!--        android:layout_height="10dp"-->
-<!--        app:strokeColor="@color/red"-->
-<!--        app:strokeWidth="20dp"-->
-<!--        app:cardCornerRadius="3dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/index" />-->
-    <!--
-    <androidx.cardview.widget.CardView
-        android:layout_width="20dp"
-        android:layout_height="10dp"
-        app:cardBackgroundColor="#f00"
-        app:cardCornerRadius="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/index">
--->
         <ImageView
             android:id="@+id/box"
             android:layout_width="20dp"
