@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layoutDirection="rtl">
+    android:layoutDirection="rtl"
+    tools:showIn="@layout/fragment_filter">
 
     <CheckBox
         android:id="@+id/must_numbers_checkbox"
@@ -21,6 +22,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:alpha="0"
+        android:layoutDirection="ltr"
         android:paddingStart="10dp"
         android:paddingBottom="10dp"
         android:visibility="gone"

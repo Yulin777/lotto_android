@@ -7,4 +7,5 @@
 
     <include layout="@layout/must_numbers" />
     <include layout="@layout/must_not_numbers" />
+    <include layout="@layout/limit_sequential_numbers" />
 </LinearLayout>

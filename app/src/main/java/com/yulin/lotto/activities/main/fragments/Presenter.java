@@ -1,7 +1,12 @@
 package com.yulin.lotto.activities.main.fragments;
 
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +30,35 @@ class Presenter {
     public void setViews() {
         setMustNums();
         setMustNotNums();
+        setSequentialNumbers();
+    }
+
+    private void setSequentialNumbers() {
+        CheckBox sequentialNumbersCheckbox = mView.getSequentialNumbersCheckbox();
+        LinearLayout limitSeqContainer = mView.getLimitSeqContainer();
+        SeekBar seekBar = mView.getLimitSeqBar();
+        TextView chosenNumber = mView.getLimitSeqChoice();
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                chosenNumber.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+//        Spinner sequentialNumbersSpinner = mView.getSequentialNumbersSpinner();
+//        Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6};
+//        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(sequentialNumbersSpinner.getContext(), android.R.layout.simple_spinner_item, items);
+//        sequentialNumbersSpinner.setAdapter(adapter);
+
+        setOnCheckAnimation(sequentialNumbersCheckbox, limitSeqContainer/*sequentialNumbersSpinner*/);
     }
 
     private void setMustNotNums() {
@@ -35,7 +69,6 @@ class Presenter {
         setOnCheckAnimation(mustNotNumsCheckbox, numbersTable);
 
     }
-
 
     private void setOnCheckAnimation(CheckBox mustNotNumsCheckbox, View view) {
         mustNotNumsCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
