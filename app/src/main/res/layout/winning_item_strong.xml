@@ -26,7 +26,6 @@
             android:background="@drawable/round_blue"
             android:gravity="center"
             android:text="1"
-            android:textColor="@color/white"
             tools:showIn="@layout/activity_winning" />
     </LinearLayout>
 </LinearLayout>

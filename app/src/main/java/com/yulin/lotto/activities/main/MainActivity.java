@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     public void openWinningsActivity() {
         Intent intent = new Intent(this, WinningsActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
     }
 
 

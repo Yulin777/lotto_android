@@ -41,4 +41,10 @@ public class WinningsActivity extends AppCompatActivity implements IWinningsView
     public Context getContext() {
         return this;
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_in_down);
+    }
 }
