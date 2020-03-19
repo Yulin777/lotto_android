@@ -1,4 +1,4 @@
-package com.yulin.lotto.activities.main.fragments;
+package com.yulin.lotto.activities.main.ui.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,32 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yulin.lotto.R;
 
-interface IFilterView {
-
-    CheckBox getMustNumbersCheckBox();
-
-    RecyclerView getMustNumbersTable();
-
-    CheckBox getMustNotNumbersCheckBox();
-
-    RecyclerView getMustNotNumbersTable();
-
-    CheckBox getSequentialNumbersCheckbox();
-
-    LinearLayout getLimitSeqContainer();
-
-    SeekBar getLimitSeqBar();
-
-    TextView getLimitSeqChoice();
-
-}
-
 public class FilterFragment extends Fragment implements IFilterView {
     private Presenter mPresenter;
     private CheckBox mustNumbersCheckbox;
     private RecyclerView mustNumbersTable;
-    private CheckBox mustNotNumbersCheckBox;
-    private RecyclerView mustNotNumbersTable;
+    private CheckBox ExcludedNumbersCheckBox;
+    private RecyclerView ExcludedNumbersTable;
     private CheckBox sequentialNumbersCheckbox;
     private TextView limitSeqChoice;
     private SeekBar limitSeqBar;
@@ -55,8 +35,8 @@ public class FilterFragment extends Fragment implements IFilterView {
     private void findViews(View view) {
         this.mustNumbersCheckbox = view.findViewById(R.id.must_numbers_checkbox);
         this.mustNumbersTable = view.findViewById(R.id.must_numbers_table);
-        this.mustNotNumbersCheckBox = view.findViewById(R.id.must_not_numbers_checkbox);
-        this.mustNotNumbersTable = view.findViewById(R.id.must_not_numbers_table);
+        this.ExcludedNumbersCheckBox = view.findViewById(R.id.must_not_numbers_checkbox);
+        this.ExcludedNumbersTable = view.findViewById(R.id.must_not_numbers_table);
         this.sequentialNumbersCheckbox = view.findViewById(R.id.sequential_numbers_checkbox);
         this.limitSeqContainer = view.findViewById(R.id.limit_seq_container);
         this.limitSeqChoice = view.findViewById(R.id.limit_seq_choice);
@@ -83,13 +63,13 @@ public class FilterFragment extends Fragment implements IFilterView {
     }
 
     @Override
-    public CheckBox getMustNotNumbersCheckBox() {
-        return this.mustNotNumbersCheckBox;
+    public CheckBox getExcludedNumbersCheckBox() {
+        return this.ExcludedNumbersCheckBox;
     }
 
     @Override
-    public RecyclerView getMustNotNumbersTable() {
-        return this.mustNotNumbersTable;
+    public RecyclerView getExcludedNumbersTable() {
+        return this.ExcludedNumbersTable;
     }
 
     @Override
@@ -110,6 +90,11 @@ public class FilterFragment extends Fragment implements IFilterView {
     @Override
     public TextView getLimitSeqChoice() {
         return this.limitSeqChoice;
+    }
+
+    @Override
+    public CheckBox getExcludeWonNumbers() {
+        return this.excludeWonCheckbox;
     }
 
 }

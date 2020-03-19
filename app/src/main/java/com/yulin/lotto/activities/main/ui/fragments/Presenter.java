@@ -1,11 +1,9 @@
-package com.yulin.lotto.activities.main.fragments;
+package com.yulin.lotto.activities.main.ui.fragments;
 
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,7 +19,6 @@ import static android.view.View.VISIBLE;
  */
 class Presenter {
     private IFilterView mView;
-    private TableAdapter adapter;
 
     public Presenter(IFilterView mView) {
         this.mView = mView;
@@ -53,17 +50,12 @@ class Presenter {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-//        Spinner sequentialNumbersSpinner = mView.getSequentialNumbersSpinner();
-//        Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6};
-//        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(sequentialNumbersSpinner.getContext(), android.R.layout.simple_spinner_item, items);
-//        sequentialNumbersSpinner.setAdapter(adapter);
-
         setOnCheckAnimation(sequentialNumbersCheckbox, limitSeqContainer/*sequentialNumbersSpinner*/);
     }
 
     private void setMustNotNums() {
-        CheckBox mustNotNumsCheckbox = mView.getMustNotNumbersCheckBox();
-        RecyclerView numbersTable = mView.getMustNotNumbersTable();
+        CheckBox mustNotNumsCheckbox = mView.getExcludedNumbersCheckBox();
+        RecyclerView numbersTable = mView.getExcludedNumbersTable();
         setNumsTable(numbersTable);
 
         setOnCheckAnimation(mustNotNumsCheckbox, numbersTable);

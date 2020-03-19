@@ -54,4 +54,8 @@ public class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
         notifyDataSetChanged();
     }
 
+    public List<Boolean> getChoiceList() {
+        return this.choiceList;
+    }
+
 }

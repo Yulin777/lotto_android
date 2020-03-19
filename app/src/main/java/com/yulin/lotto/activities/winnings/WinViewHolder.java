@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yulin.lotto.R;
+import com.yulin.lotto.common.WinObject;
 
 /**
  * Created by Yulin. I on 19,March,2020

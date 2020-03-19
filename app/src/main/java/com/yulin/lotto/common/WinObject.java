@@ -1,12 +1,12 @@
-package com.yulin.lotto.activities.winnings;
+package com.yulin.lotto.common;
 
 /**
  * Created by Yulin. I on 19,March,2020
  */
-class WinObject {
-    String serial;
-    String first, second, third, fourth, fifth, sixth, strong;
-    String date;
+public class WinObject {
+    public String serial;
+    public String first, second, third, fourth, fifth, sixth, strong;
+    public String date;
 
     public WinObject(String[] splitted) {
 

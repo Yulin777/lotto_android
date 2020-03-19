@@ -11,7 +11,7 @@
         android:id="@+id/exclude_won_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="המנע מתוצאות שזכו"
+        android:text="המנע מתוצאות שכבר זכו"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
