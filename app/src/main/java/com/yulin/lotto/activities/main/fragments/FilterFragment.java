@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -33,7 +32,6 @@ interface IFilterView {
 
     TextView getLimitSeqChoice();
 
-//    Spinner getSequentialNumbersSpinner();
 }
 
 public class FilterFragment extends Fragment implements IFilterView {
@@ -46,7 +44,7 @@ public class FilterFragment extends Fragment implements IFilterView {
     private TextView limitSeqChoice;
     private SeekBar limitSeqBar;
     private LinearLayout limitSeqContainer;
-//    private Spinner sequentialNumbersSpinner;
+    private CheckBox excludeWonCheckbox;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,10 +58,10 @@ public class FilterFragment extends Fragment implements IFilterView {
         this.mustNotNumbersCheckBox = view.findViewById(R.id.must_not_numbers_checkbox);
         this.mustNotNumbersTable = view.findViewById(R.id.must_not_numbers_table);
         this.sequentialNumbersCheckbox = view.findViewById(R.id.sequential_numbers_checkbox);
-//        this.sequentialNumbersSpinner = view.findViewById(R.id.sequential_numbers_spinner);
         this.limitSeqContainer = view.findViewById(R.id.limit_seq_container);
         this.limitSeqChoice = view.findViewById(R.id.limit_seq_choice);
         this.limitSeqBar = view.findViewById(R.id.limit_seq_bar);
+        this.excludeWonCheckbox = view.findViewById(R.id.exclude_won_checkbox);
     }
 
     @Override
@@ -114,8 +112,4 @@ public class FilterFragment extends Fragment implements IFilterView {
         return this.limitSeqChoice;
     }
 
-//    @Override
-//    public Spinner getSequentialNumbersSpinner() {
-//        return this.sequentialNumbersSpinner;
-//    }
 }
