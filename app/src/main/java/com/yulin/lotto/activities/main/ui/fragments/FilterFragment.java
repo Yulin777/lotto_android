@@ -8,11 +8,14 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yulin.lotto.R;
+
+import static com.yulin.lotto.activities.main.NumbersGenerator.MAX_NUMS_TO_FILL;
 
 public class FilterFragment extends Fragment implements IFilterView {
     private Presenter mPresenter;
@@ -53,12 +56,12 @@ public class FilterFragment extends Fragment implements IFilterView {
     }
 
     @Override
-    public CheckBox getMustNumbersCheckBox() {
+    public CheckBox getIncludeNumbersCheckBox() {
         return this.mustNumbersCheckbox;
     }
 
     @Override
-    public RecyclerView getMustNumbersTable() {
+    public RecyclerView getIncludeNumbersTable() {
         return this.mustNumbersTable;
     }
 
@@ -95,6 +98,11 @@ public class FilterFragment extends Fragment implements IFilterView {
     @Override
     public CheckBox getExcludeWonNumbers() {
         return this.excludeWonCheckbox;
+    }
+
+    @Override
+    public void onMaxSelectionReached() {
+        Toast.makeText(getActivity(), "ניתן לבחור עד " + MAX_NUMS_TO_FILL + " מספרים", Toast.LENGTH_SHORT).show();
     }
 
 }

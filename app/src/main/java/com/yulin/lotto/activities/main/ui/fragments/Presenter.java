@@ -13,6 +13,7 @@ import com.yulin.lotto.activities.main.TableAdapter;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.yulin.lotto.activities.main.NumbersGenerator.MAX_NUMS_TO_FILL;
 
 /**
  * Created by Yulin. I on 17,March,2020
@@ -25,8 +26,8 @@ class Presenter {
     }
 
     public void setViews() {
-        setMustNums();
-        setMustNotNums();
+        setIncludedNums();
+        setExcludeNums();
         setSequentialNumbers();
     }
 
@@ -53,12 +54,12 @@ class Presenter {
         setOnCheckAnimation(sequentialNumbersCheckbox, limitSeqContainer/*sequentialNumbersSpinner*/);
     }
 
-    private void setMustNotNums() {
-        CheckBox mustNotNumsCheckbox = mView.getExcludedNumbersCheckBox();
+    private void setExcludeNums() {
+        CheckBox excludedNumsCheckbox = mView.getExcludedNumbersCheckBox();
         RecyclerView numbersTable = mView.getExcludedNumbersTable();
-        setNumsTable(numbersTable);
+        setNumsTable(numbersTable, false);
 
-        setOnCheckAnimation(mustNotNumsCheckbox, numbersTable);
+        setOnCheckAnimation(excludedNumsCheckbox, numbersTable);
 
     }
 
@@ -81,16 +82,18 @@ class Presenter {
         });
     }
 
-    private void setMustNums() {
-        CheckBox mustNumsCheckbox = mView.getMustNumbersCheckBox();
-        RecyclerView numbersTable = mView.getMustNumbersTable();
-        setNumsTable(numbersTable);
+    private void setIncludedNums() {
+        CheckBox IncludedNumsCheckbox = mView.getIncludeNumbersCheckBox();
+        RecyclerView numbersTable = mView.getIncludeNumbersTable();
+        setNumsTable(numbersTable, true);
 
-        setOnCheckAnimation(mustNumsCheckbox, numbersTable);
+        setOnCheckAnimation(IncludedNumsCheckbox, numbersTable);
     }
 
-    private void setNumsTable(RecyclerView numbersTable) {
-        numbersTable.setAdapter(new TableAdapter());
+    private void setNumsTable(RecyclerView numbersTable, boolean isInclude) {
+        TableAdapter adapter = new TableAdapter();
+        if (isInclude) adapter.setMaxChosen(MAX_NUMS_TO_FILL, () -> mView.onMaxSelectionReached());
+        numbersTable.setAdapter(adapter);
         numbersTable.setLayoutManager(new GridLayoutManager(numbersTable.getContext(), 10));
     }
 }

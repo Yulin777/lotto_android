@@ -11,12 +11,12 @@ import java.util.List;
  */
 public class NumbersGenerator {
     private static final int MAX_NUM = 37;
-    private static final int MAX_NUMS_TO_FILL = 6;
+    public static final int MAX_NUMS_TO_FILL = 6;
     private final IFilterView filterView;
-    List<Boolean> generatedNumbers;
+    List<Boolean> generatedNumbers = new ArrayList<>();
 
-    List<Integer> mustNumbers;
-    List<Integer> excludedNumbers;
+    List<Integer> mustNumbers = new ArrayList<>();
+    List<Integer> excludedNumbers = new ArrayList<>();
     int seqNumbersLimit;
     private boolean excludeWonNumbers;
 
@@ -25,10 +25,16 @@ public class NumbersGenerator {
     }
 
     public List<Boolean> generateFilteredNumbers() {
-        generatedNumbers = new ArrayList<>(Collections.nCopies(37, false)); //reset
-
+        List<Integer> temp;
         do {
-            for (int i = 0; i < MAX_NUMS_TO_FILL; i++) {
+            generatedNumbers = new ArrayList<>(Collections.nCopies(37, false)); //reset
+
+            for (Integer mustNumber : mustNumbers) {
+                generatedNumbers.set(mustNumber, true);
+            }
+
+            temp = new ArrayList<>();
+            for (int i = 0; i < MAX_NUMS_TO_FILL - mustNumbers.size(); i++) {
                 int randNum;
 
                 do {
@@ -36,8 +42,9 @@ public class NumbersGenerator {
                 } while (!passFiltersForSingleNumber(randNum));
 
                 generatedNumbers.set(randNum, true);
+                temp.add(randNum);
             }
-        } while (!passFiltersForWholeChoice(generatedNumbers));
+        } while (!passFiltersForWholeChoice(temp));
 
         return generatedNumbers;
     }
@@ -49,7 +56,19 @@ public class NumbersGenerator {
      * @param generatedNumbers generated choice after the first filter.
      * @return true if passes filters for the whole choice
      */
-    private boolean passFiltersForWholeChoice(List<Boolean> generatedNumbers) {
+    private boolean passFiltersForWholeChoice(List<Integer> generatedNumbers) {
+        return  !isInWonNumbers(generatedNumbers);
+    }
+
+    private boolean isInWonNumbers(List<Integer> generatedNumbers) {
+        return false;
+    }
+
+    private boolean hasMustNumbers(List<Integer> generatedNumbers) {
+        for (Integer mustNumber : mustNumbers) {
+            if (!generatedNumbers.contains(mustNumber))
+                return false;
+        }
         return true;
     }
 
@@ -97,8 +116,8 @@ public class NumbersGenerator {
 
     private void updateMustNumbersFilter() {
         mustNumbers = new ArrayList<>();
-        if (filterView.getMustNumbersCheckBox().isChecked()) {
-            List<Boolean> boolList = ((TableAdapter) filterView.getMustNumbersTable().getAdapter()).getChoiceList();
+        if (filterView.getIncludeNumbersCheckBox().isChecked()) {
+            List<Boolean> boolList = ((TableAdapter) filterView.getIncludeNumbersTable().getAdapter()).getChoiceList();
             for (int i = 0; i < boolList.size(); i++) {
                 if (boolList.get(i)) {
                     mustNumbers.add(i - 3);

@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public interface IFilterView {
 
-    CheckBox getMustNumbersCheckBox();
+    CheckBox getIncludeNumbersCheckBox();
 
-    RecyclerView getMustNumbersTable();
+    RecyclerView getIncludeNumbersTable();
 
     CheckBox getExcludedNumbersCheckBox();
 
@@ -26,4 +26,6 @@ public interface IFilterView {
     TextView getLimitSeqChoice();
 
     CheckBox getExcludeWonNumbers();
+
+    void onMaxSelectionReached();
 }

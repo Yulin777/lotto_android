@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.yulin.lotto.R;
 
@@ -18,6 +19,8 @@ import java.util.List;
  */
 public class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
     private List<Boolean> choiceList = new ArrayList<>(Collections.nCopies(40, false));
+    private int maxNumsToFill;
+    private Runnable onMaxSelectionReached = null;
 
     @NonNull
     @Override
@@ -36,10 +39,22 @@ public class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
             holder.setSelection(choiceList.get(position));
             holder.itemView.setOnClickListener(v -> {
                 boolean isChosen = choiceList.get(position);
+                if (onMaxSelectionReached != null && !isChosen && getChosenSize() == maxNumsToFill) {
+                    onMaxSelectionReached.run();
+                    return;
+                }
                 choiceList.set(position, !isChosen);
                 notifyItemChanged(position);
             });
         }
+    }
+
+    private int getChosenSize() {
+        int cnt = 0;
+        for (Boolean bool : choiceList) {
+            if (bool) cnt++;
+        }
+        return cnt;
     }
 
     @Override
@@ -58,4 +73,8 @@ public class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
         return this.choiceList;
     }
 
+    public void setMaxChosen(int maxNumsToFill, Runnable onMaxSelectionReached) {
+        this.maxNumsToFill = maxNumsToFill;
+        this.onMaxSelectionReached = onMaxSelectionReached;
+    }
 }
