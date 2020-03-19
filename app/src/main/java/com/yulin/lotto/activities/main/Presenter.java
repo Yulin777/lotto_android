@@ -33,6 +33,12 @@ public class Presenter {
         setTable();
         setDrawBtn();
         setFilterBtn();
+        setWinningsBtn();
+    }
+
+    private void setWinningsBtn() {
+        Button winningsBtn = mView.getWinningsBtn();
+        winningsBtn.setOnClickListener(v -> mView.openWinningsActivity());
     }
 
     private void setFilterBtn() {

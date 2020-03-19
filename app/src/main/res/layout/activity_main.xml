@@ -44,9 +44,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/draw_btn" />
 
+        <Button
+            android:id="@+id/winnings_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="צפייה בכל הזכיות"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <include layout="@layout/filter_drawer" />
+    <include layout="@layout/filter_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
