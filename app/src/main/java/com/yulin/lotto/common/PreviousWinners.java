@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 
 import com.opencsv.CSVReader;
 import com.yulin.lotto.R;
-import com.yulin.lotto.activities.winnings.Presenter;
 import com.yulin.lotto.rest.GetWinsListService;
 import com.yulin.lotto.rest.RetrofitInstance;
 

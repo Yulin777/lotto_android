@@ -27,18 +27,18 @@ public class NumbersGenerator {
     public List<Boolean> generateFilteredNumbers() {
         generatedNumbers = new ArrayList<>(Collections.nCopies(37, false)); //reset
 
-        do
-        {
+        do {
             for (int i = 0; i < MAX_NUMS_TO_FILL; i++) {
                 int randNum;
 
                 do {
                     randNum = (int) (Math.random() * (MAX_NUM - 1)) + 1;
-                } while (!passFiltersForSingleNumber(randNum) /*numbers.get(randNum)*/);
+                } while (!passFiltersForSingleNumber(randNum));
 
                 generatedNumbers.set(randNum, true);
             }
         } while (!passFiltersForWholeChoice(generatedNumbers));
+
         return generatedNumbers;
     }
 
@@ -50,7 +50,7 @@ public class NumbersGenerator {
      * @return true if passes filters for the whole choice
      */
     private boolean passFiltersForWholeChoice(List<Boolean> generatedNumbers) {
-        return false;
+        return true;
     }
 
     /**
@@ -73,19 +73,19 @@ public class NumbersGenerator {
     }
 
     private void updateExcludeWonNumbers() {
-        excludeWonNumbers = filterView.getExcludeWonNumbers().isSelected();
+        excludeWonNumbers = filterView.getExcludeWonNumbers().isChecked();
     }
 
     private void updateLimitSeqNumbers() {
         seqNumbersLimit = 6;
-        if (filterView.getSequentialNumbersCheckbox().isSelected()) {
+        if (filterView.getSequentialNumbersCheckbox().isChecked()) {
             seqNumbersLimit = filterView.getLimitSeqBar().getProgress();
         }
     }
 
     private void updateExcludedNumbersFilter() {
         excludedNumbers = new ArrayList<>();
-        if (filterView.getExcludedNumbersCheckBox().isSelected()) {
+        if (filterView.getExcludedNumbersCheckBox().isChecked()) {
             List<Boolean> boolList = ((TableAdapter) filterView.getExcludedNumbersTable().getAdapter()).getChoiceList();
             for (int i = 0; i < boolList.size(); i++) {
                 if (boolList.get(i)) {
@@ -97,7 +97,7 @@ public class NumbersGenerator {
 
     private void updateMustNumbersFilter() {
         mustNumbers = new ArrayList<>();
-        if (filterView.getMustNumbersCheckBox().isSelected()) {
+        if (filterView.getMustNumbersCheckBox().isChecked()) {
             List<Boolean> boolList = ((TableAdapter) filterView.getMustNumbersTable().getAdapter()).getChoiceList();
             for (int i = 0; i < boolList.size(); i++) {
                 if (boolList.get(i)) {

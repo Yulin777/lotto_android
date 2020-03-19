@@ -8,7 +8,7 @@
     tools:showIn="@layout/fragment_filter">
 
     <CheckBox
-        android:id="@+id/must_not_numbers_checkbox"
+        android:id="@+id/exclude_numbers_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="מספרים שאסור שיופיעו"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/must_not_numbers_table"
+        android:id="@+id/exclude_numbers_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -27,7 +27,7 @@
         android:paddingBottom="10dp"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/must_not_numbers_checkbox"
+        app:layout_constraintTop_toBottomOf="@id/exclude_numbers_checkbox"
         tools:itemCount="40"
         tools:listitem="@layout/number_item" />
 

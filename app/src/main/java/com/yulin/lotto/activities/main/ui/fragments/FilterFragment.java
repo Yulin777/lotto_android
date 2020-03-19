@@ -18,7 +18,7 @@ public class FilterFragment extends Fragment implements IFilterView {
     private Presenter mPresenter;
     private CheckBox mustNumbersCheckbox;
     private RecyclerView mustNumbersTable;
-    private CheckBox ExcludedNumbersCheckBox;
+    private CheckBox excludedNumbersCheckBox;
     private RecyclerView ExcludedNumbersTable;
     private CheckBox sequentialNumbersCheckbox;
     private TextView limitSeqChoice;
@@ -35,8 +35,8 @@ public class FilterFragment extends Fragment implements IFilterView {
     private void findViews(View view) {
         this.mustNumbersCheckbox = view.findViewById(R.id.must_numbers_checkbox);
         this.mustNumbersTable = view.findViewById(R.id.must_numbers_table);
-        this.ExcludedNumbersCheckBox = view.findViewById(R.id.must_not_numbers_checkbox);
-        this.ExcludedNumbersTable = view.findViewById(R.id.must_not_numbers_table);
+        this.excludedNumbersCheckBox = view.findViewById(R.id.exclude_numbers_checkbox);
+        this.ExcludedNumbersTable = view.findViewById(R.id.exclude_numbers_table);
         this.sequentialNumbersCheckbox = view.findViewById(R.id.sequential_numbers_checkbox);
         this.limitSeqContainer = view.findViewById(R.id.limit_seq_container);
         this.limitSeqChoice = view.findViewById(R.id.limit_seq_choice);
@@ -64,7 +64,7 @@ public class FilterFragment extends Fragment implements IFilterView {
 
     @Override
     public CheckBox getExcludedNumbersCheckBox() {
-        return this.ExcludedNumbersCheckBox;
+        return this.excludedNumbersCheckBox;
     }
 
     @Override
