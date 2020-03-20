@@ -81,7 +81,41 @@ public class NumbersGenerator {
      */
     private boolean passFiltersForSingleNumber(int randNum) {
         return !generatedNumbers.get(randNum)
-                && !excludedNumbers.contains(randNum);
+                && !excludedNumbers.contains(randNum)
+                && !numberIsPartOfSequence(randNum, generatedNumbers);
+    }
+
+    private boolean numberIsPartOfSequence(int randNum, List<Boolean> generatedNumbers) {
+        if (filterView.getSequentialNumbersCheckbox().isChecked()) {
+            int limit = filterView.getLimitSeqBar().getProgress();
+
+            return isSequenceFromLeft(randNum, generatedNumbers, limit) || isSequenceFromRight(randNum, generatedNumbers, limit);
+        }
+        return false;
+    }
+
+    private boolean isSequenceFromRight(int randNum, List<Boolean> generatedNumbers, int limit) {
+        int cntFromRight = 0;
+
+        for (int i = randNum + 1; i < randNum + 1 + limit && i < MAX_NUM; i++) {
+            if (generatedNumbers.get(i)) {
+                cntFromRight++;
+            }
+            if (cntFromRight == limit) return true;
+        }
+        return false;
+    }
+
+    private boolean isSequenceFromLeft(int randNum, List<Boolean> generatedNumbers, int limit) {
+        int cntFromLeft = 0;
+
+        for (int i = randNum - 1; i > randNum - 1 - limit && i >= 0; i--) {
+            if (generatedNumbers.get(i)) {
+                cntFromLeft++;
+            }
+            if (cntFromLeft == limit) return true;
+        }
+        return false;
     }
 
     public void updateFilters() {
