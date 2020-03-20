@@ -13,6 +13,7 @@ import com.yulin.lotto.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Created by Yulin. I on 16,March,2020
@@ -21,6 +22,7 @@ public class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
     private List<Boolean> choiceList = new ArrayList<>(Collections.nCopies(40, false));
     private int maxNumsToFill;
     private Runnable onMaxSelectionReached = null;
+    private Consumer<Integer> onItemClickedAppendedEvent;
 
     @NonNull
     @Override
@@ -43,6 +45,7 @@ public class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
                     onMaxSelectionReached.run();
                     return;
                 }
+                onItemClickedAppendedEvent.accept(position);
                 choiceList.set(position, !isChosen);
                 notifyItemChanged(position);
             });
@@ -76,5 +79,14 @@ public class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
     public void setMaxChosen(int maxNumsToFill, Runnable onMaxSelectionReached) {
         this.maxNumsToFill = maxNumsToFill;
         this.onMaxSelectionReached = onMaxSelectionReached;
+    }
+
+    public void addEventOnItemClick(Consumer<Integer> onItemClickedAppendedEvent) {
+        this.onItemClickedAppendedEvent = onItemClickedAppendedEvent;
+    }
+
+    public void unSelectItem(Integer index) {
+        choiceList.set(index, false);
+        notifyItemChanged(index);
     }
 }

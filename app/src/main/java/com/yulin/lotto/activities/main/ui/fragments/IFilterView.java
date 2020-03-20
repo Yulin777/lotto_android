@@ -27,5 +27,7 @@ public interface IFilterView {
 
     CheckBox getExcludeWonNumbers();
 
-    void onMaxSelectionReached();
+    void onIncludeMaxSelectionReached();
+
+    void onExcludeMaxSelectionReached();
 }

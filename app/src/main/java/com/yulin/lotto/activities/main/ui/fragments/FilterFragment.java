@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yulin.lotto.R;
 
+import static com.yulin.lotto.activities.main.NumbersGenerator.MAX_NUM;
 import static com.yulin.lotto.activities.main.NumbersGenerator.MAX_NUMS_TO_FILL;
 
 public class FilterFragment extends Fragment implements IFilterView {
@@ -101,8 +102,14 @@ public class FilterFragment extends Fragment implements IFilterView {
     }
 
     @Override
-    public void onMaxSelectionReached() {
+    public void onIncludeMaxSelectionReached() {
         Toast.makeText(getActivity(), "ניתן לבחור עד " + MAX_NUMS_TO_FILL + " מספרים", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onExcludeMaxSelectionReached() {
+        Toast.makeText(getActivity(), "חובה להשאיר לפחות " + MAX_NUMS_TO_FILL + " מספרים", Toast.LENGTH_SHORT).show();
+
     }
 
 }

@@ -13,23 +13,28 @@ import com.yulin.lotto.activities.main.TableAdapter;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.yulin.lotto.activities.main.NumbersGenerator.MAX_NUM;
 import static com.yulin.lotto.activities.main.NumbersGenerator.MAX_NUMS_TO_FILL;
 
 /**
  * Created by Yulin. I on 17,March,2020
  */
-class Presenter {
+public class Presenter {
     private IFilterView mView;
+    private TableAdapter includedAdapter;
+    private TableAdapter excludedAdapter;
 
     public Presenter(IFilterView mView) {
         this.mView = mView;
     }
 
     public void setViews() {
+        setAdapters();
         setIncludedNums();
         setExcludeNums();
         setSequentialNumbers();
     }
+
 
     private void setSequentialNumbers() {
         CheckBox sequentialNumbersCheckbox = mView.getSequentialNumbersCheckbox();
@@ -51,16 +56,7 @@ class Presenter {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-        setOnCheckAnimation(sequentialNumbersCheckbox, limitSeqContainer/*sequentialNumbersSpinner*/);
-    }
-
-    private void setExcludeNums() {
-        CheckBox excludedNumsCheckbox = mView.getExcludedNumbersCheckBox();
-        RecyclerView numbersTable = mView.getExcludedNumbersTable();
-        setNumsTable(numbersTable, false);
-
-        setOnCheckAnimation(excludedNumsCheckbox, numbersTable);
-
+        setOnCheckAnimation(sequentialNumbersCheckbox, limitSeqContainer);
     }
 
     private void setOnCheckAnimation(CheckBox mustNotNumsCheckbox, View view) {
@@ -82,18 +78,35 @@ class Presenter {
         });
     }
 
+    private void setAdapters() {
+        excludedAdapter = new TableAdapter();
+        includedAdapter = new TableAdapter();
+
+        excludedAdapter.setMaxChosen(MAX_NUM - MAX_NUMS_TO_FILL, () -> mView.onExcludeMaxSelectionReached());
+        excludedAdapter.addEventOnItemClick(index -> includedAdapter.unSelectItem(index));
+
+        includedAdapter.setMaxChosen(MAX_NUMS_TO_FILL, () -> mView.onIncludeMaxSelectionReached());
+        includedAdapter.addEventOnItemClick(index -> excludedAdapter.unSelectItem(index));
+    }
+
+    private void setExcludeNums() {
+        CheckBox excludedNumsCheckbox = mView.getExcludedNumbersCheckBox();
+        RecyclerView numbersTable = mView.getExcludedNumbersTable();
+
+        numbersTable.setAdapter(excludedAdapter);
+        numbersTable.setLayoutManager(new GridLayoutManager(numbersTable.getContext(), 10));
+
+        setOnCheckAnimation(excludedNumsCheckbox, numbersTable);
+    }
+
     private void setIncludedNums() {
         CheckBox IncludedNumsCheckbox = mView.getIncludeNumbersCheckBox();
+
         RecyclerView numbersTable = mView.getIncludeNumbersTable();
-        setNumsTable(numbersTable, true);
+        numbersTable.setAdapter(includedAdapter);
+        numbersTable.setLayoutManager(new GridLayoutManager(numbersTable.getContext(), 10));
 
         setOnCheckAnimation(IncludedNumsCheckbox, numbersTable);
     }
 
-    private void setNumsTable(RecyclerView numbersTable, boolean isInclude) {
-        TableAdapter adapter = new TableAdapter();
-        if (isInclude) adapter.setMaxChosen(MAX_NUMS_TO_FILL, () -> mView.onMaxSelectionReached());
-        numbersTable.setAdapter(adapter);
-        numbersTable.setLayoutManager(new GridLayoutManager(numbersTable.getContext(), 10));
-    }
 }

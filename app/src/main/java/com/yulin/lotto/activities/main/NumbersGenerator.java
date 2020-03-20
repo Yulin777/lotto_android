@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Yulin. I on 19,March,2020
  */
 public class NumbersGenerator {
-    private static final int MAX_NUM = 37;
+    public static final int MAX_NUM = 37;
     public static final int MAX_NUMS_TO_FILL = 6;
     private final IFilterView filterView;
     List<Boolean> generatedNumbers = new ArrayList<>();
@@ -27,7 +27,7 @@ public class NumbersGenerator {
     public List<Boolean> generateFilteredNumbers() {
         List<Integer> temp;
         do {
-            generatedNumbers = new ArrayList<>(Collections.nCopies(37, false)); //reset
+            generatedNumbers = new ArrayList<>(Collections.nCopies(MAX_NUM, false)); //reset
 
             for (Integer mustNumber : mustNumbers) {
                 generatedNumbers.set(mustNumber, true);
@@ -57,7 +57,7 @@ public class NumbersGenerator {
      * @return true if passes filters for the whole choice
      */
     private boolean passFiltersForWholeChoice(List<Integer> generatedNumbers) {
-        return  !isInWonNumbers(generatedNumbers);
+        return !isInWonNumbers(generatedNumbers);
     }
 
     private boolean isInWonNumbers(List<Integer> generatedNumbers) {
