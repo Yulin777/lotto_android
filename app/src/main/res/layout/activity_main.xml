@@ -19,6 +19,7 @@
             android:background="#fcc"
             android:paddingStart="10dp"
             android:paddingBottom="10dp"
+            android:layoutDirection="ltr"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="40"
