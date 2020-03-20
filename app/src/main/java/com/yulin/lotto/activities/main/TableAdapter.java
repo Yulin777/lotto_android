@@ -45,7 +45,7 @@ public class TableAdapter extends RecyclerView.Adapter<NumberViewHolder> {
                     onMaxSelectionReached.run();
                     return;
                 }
-                onItemClickedAppendedEvent.accept(position);
+                if (onItemClickedAppendedEvent != null) onItemClickedAppendedEvent.accept(position);
                 choiceList.set(position, !isChosen);
                 notifyItemChanged(position);
             });
