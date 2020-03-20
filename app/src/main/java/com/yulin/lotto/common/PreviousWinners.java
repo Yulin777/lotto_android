@@ -27,17 +27,12 @@ import retrofit2.Response;
 public class PreviousWinners {
     private final Context context;
     List<WinObject> winList = new ArrayList<>();
-    private static PreviousWinners instance;
 
-    public static PreviousWinners getInstance(Context context, Consumer<List<WinObject>> onListUpdated) {
-        if (instance == null) {
-            instance = new PreviousWinners(context, onListUpdated);
-        }
-        return instance;
+    public PreviousWinners(Context context) {
+        this.context = context;
     }
 
-    private PreviousWinners(Context context, Consumer<List<WinObject>> onListUpdated) {
-        this.context = context;
+    public void fetchWinList(Consumer<List<WinObject>> onListUpdated) {
         initWinListFromLocal(onListUpdated);
         updateWinListFromCall(onListUpdated);
     }

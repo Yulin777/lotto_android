@@ -22,7 +22,8 @@ public class Presenter {
     private void setWinningRecyclerView() {
         RecyclerView recyclerView = mView.getWinningRecyclerView();
         winningAdapter = new WinningAdapter();
-        PreviousWinners previousWinners = PreviousWinners.getInstance(mView.getContext(), winList -> winningAdapter.setWinList(winList));
+        PreviousWinners previousWinners = new PreviousWinners(mView.getContext());
+        previousWinners.fetchWinList(winList -> winningAdapter.setWinList(winList));
         recyclerView.setAdapter(winningAdapter);
     }
 }

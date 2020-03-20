@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.yulin.lotto.R;
 import com.yulin.lotto.common.WinObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Yulin. I on 19,March,2020
  */
 class WinningAdapter extends Adapter<WinViewHolder> {
-    private List<WinObject> winList;
+    private List<WinObject> winList = new ArrayList<>();
 
     @NonNull
     @Override
