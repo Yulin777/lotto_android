@@ -11,6 +11,12 @@
     <style name="RiseUp" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <item name="android:windowEnterTransition">@android:transition/slide_top</item>
         <item name="android:windowExitTransition">@android:transition/slide_bottom</item>
+
+        <item name="background">@android:color/transparent</item>
+        <item name="android:cacheColorHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
     </style>
 
 </resources>

@@ -3,13 +3,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layoutDirection="rtl"
     android:orientation="vertical">
 
-    <include layout="@layout/must_numbers" />
+    <include
+        layout="@layout/must_numbers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
 
-    <include layout="@layout/must_not_numbers" />
+    <include
+        layout="@layout/must_not_numbers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
 
-    <include layout="@layout/limit_sequential_numbers" />
+    <include
+        layout="@layout/limit_sequential_numbers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
 
-    <include layout="@layout/exclude_won_combinations" />
+    <include
+        layout="@layout/exclude_won_combinations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
 </LinearLayout>
