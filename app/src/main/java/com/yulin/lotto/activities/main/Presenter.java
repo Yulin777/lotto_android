@@ -15,15 +15,15 @@ import com.yulin.lotto.activities.main.ui.IMainView;
  */
 public class Presenter {
     private final NumbersGenerator generator;
-    IMainView mView;
-    TableAdapter adapter;
+    private IMainView mView;
+    private TableAdapter adapter;
 
     public Presenter(IMainView mView) {
         this.mView = mView;
         generator = new NumbersGenerator(mView.getFilterView());
     }
 
-    public void setTable() {
+    private void setTable() {
         RecyclerView table = mView.getTable();
         adapter = new TableAdapter();
         table.setAdapter(adapter);
@@ -67,15 +67,11 @@ public class Presenter {
 
     private void setFilterBtn() {
         Button filterBtn = mView.getFilterBtn();
-        filterBtn.setOnClickListener(v -> {
-            mView.openFilterDrawer();
-        });
+        filterBtn.setOnClickListener(v -> mView.openFilterDrawer());
     }
 
     private void setDrawBtn() {
         Button drawBtn = mView.getDrawBtn();
-        drawBtn.setOnClickListener(v -> {
-            adapter.setChoiceList(generator.generateFilteredNumbers());
-        });
+        drawBtn.setOnClickListener(v -> adapter.setChoiceList(generator.generateFilteredNumbers()));
     }
 }

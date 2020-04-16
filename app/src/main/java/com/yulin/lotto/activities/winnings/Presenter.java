@@ -7,15 +7,15 @@ import com.yulin.lotto.common.PreviousWinners;
 /**
  * Created by Yulin. I on 19,March,2020
  */
-public class Presenter {
+class Presenter {
     private final IWinningsView mView;
     private WinningAdapter winningAdapter;
 
-    public Presenter(IWinningsView view) {
+    Presenter(IWinningsView view) {
         this.mView = view;
     }
 
-    public void setViews() {
+    void setViews() {
         setWinningRecyclerView();
     }
 

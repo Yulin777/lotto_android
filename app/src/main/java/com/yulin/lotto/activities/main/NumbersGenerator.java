@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.yulin.lotto.common.PreviousWinners.winSerials;
+
 /**
  * Created by Yulin. I on 19,March,2020
  */
@@ -13,19 +15,19 @@ public class NumbersGenerator {
     public static final int MAX_NUM = 37;
     public static final int MAX_NUMS_TO_FILL = 6;
     private final IFilterView filterView;
-    List<Boolean> generatedNumbers = new ArrayList<>();
+    private List<Boolean> generatedNumbers = new ArrayList<>();
 
-    List<Integer> mustNumbers = new ArrayList<>();
-    List<Integer> excludedNumbers = new ArrayList<>();
-    int seqNumbersLimit;
+    private List<Integer> mustNumbers = new ArrayList<>();
+    private List<Integer> excludedNumbers = new ArrayList<>();
+    private int seqNumbersLimit;
     private boolean excludeWonNumbers;
 
-    public NumbersGenerator(IFilterView filterView) {
+    NumbersGenerator(IFilterView filterView) {
         this.filterView = filterView;
     }
 
-    public List<Boolean> generateFilteredNumbers() {
-        List<Integer> temp;
+    List<Boolean> generateFilteredNumbers() {
+        List<Integer> candidate;
         do {
             generatedNumbers = new ArrayList<>(Collections.nCopies(MAX_NUM, false)); //reset
 
@@ -33,7 +35,7 @@ public class NumbersGenerator {
                 generatedNumbers.set(mustNumber, true);
             }
 
-            temp = new ArrayList<>();
+            candidate = new ArrayList<>();
             for (int i = 0; i < MAX_NUMS_TO_FILL - mustNumbers.size(); i++) {
                 int randNum;
 
@@ -42,9 +44,9 @@ public class NumbersGenerator {
                 } while (!passFiltersForSingleNumber(randNum));
 
                 generatedNumbers.set(randNum, true);
-                temp.add(randNum);
+                candidate.add(randNum);
             }
-        } while (!passFiltersForWholeChoice(temp));
+        } while (!passFiltersForWholeChoice(candidate));
 
         return generatedNumbers;
     }
@@ -53,23 +55,15 @@ public class NumbersGenerator {
      * second step of filtering.
      * this filters the array of chosen numbers.
      *
-     * @param generatedNumbers generated choice after the first filter.
+     * @param candidate generated choice after the first filter.
      * @return true if passes filters for the whole choice
      */
-    private boolean passFiltersForWholeChoice(List<Integer> generatedNumbers) {
-        return !isInWonNumbers(generatedNumbers);
+    private boolean passFiltersForWholeChoice(List<Integer> candidate) {
+        return !isInWonNumbers(candidate);
     }
 
-    private boolean isInWonNumbers(List<Integer> generatedNumbers) {
-        return false;
-    }
-
-    private boolean hasMustNumbers(List<Integer> generatedNumbers) {
-        for (Integer mustNumber : mustNumbers) {
-            if (!generatedNumbers.contains(mustNumber))
-                return false;
-        }
-        return true;
+    private boolean isInWonNumbers(List<Integer> candidate) {
+        return winSerials.contains(candidate);
     }
 
     /**
@@ -118,7 +112,7 @@ public class NumbersGenerator {
         return false;
     }
 
-    public void updateFilters() {
+    void updateFilters() {
         updateMustNumbersFilter();
         updateExcludedNumbersFilter();
         updateLimitSeqNumbers();

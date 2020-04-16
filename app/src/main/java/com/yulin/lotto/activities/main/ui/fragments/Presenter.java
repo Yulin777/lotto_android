@@ -19,20 +19,25 @@ import static com.yulin.lotto.activities.main.NumbersGenerator.MAX_NUMS_TO_FILL;
 /**
  * Created by Yulin. I on 17,March,2020
  */
-public class Presenter {
+class Presenter {
     private IFilterView mView;
     private TableAdapter includedAdapter;
     private TableAdapter excludedAdapter;
 
-    public Presenter(IFilterView mView) {
+    Presenter(IFilterView mView) {
         this.mView = mView;
     }
 
-    public void setViews() {
+    void setViews() {
         setAdapters();
         setIncludedNums();
         setExcludeNums();
         setSequentialNumbers();
+        setExcludeWinnings();
+    }
+
+    private void setExcludeWinnings() {
+
     }
 
 

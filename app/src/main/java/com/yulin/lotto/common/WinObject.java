@@ -8,8 +8,7 @@ public class WinObject {
     public String first, second, third, fourth, fifth, sixth, strong;
     public String date;
 
-    public WinObject(String[] splitted) {
-
+    WinObject(String[] splitted) {
         this.serial = splitted[0];
         this.date = splitted[1];
         this.first = splitted[7];

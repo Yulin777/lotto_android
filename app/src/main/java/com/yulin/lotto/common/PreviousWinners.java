@@ -2,6 +2,7 @@ package com.yulin.lotto.common;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.opencsv.CSVReader;
 import com.yulin.lotto.R;
@@ -13,8 +14,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -26,7 +29,8 @@ import retrofit2.Response;
  */
 public class PreviousWinners {
     private final Context context;
-    List<WinObject> winList = new ArrayList<>();
+    private List<WinObject> winList = new ArrayList<>();
+    public static List<List<Integer>> winSerials = new ArrayList<>(); //that's a copy of winList's serials numbers only
 
     public PreviousWinners(Context context) {
         this.context = context;
@@ -55,7 +59,7 @@ public class PreviousWinners {
         });
     }
 
-    public void updateWinListFromCall(CSVReader reader, Consumer<List<WinObject>> onFinish) {
+    private void updateWinListFromCall(CSVReader reader, Consumer<List<WinObject>> onFinish) {
         try {
             List<String[]> rawList = new AsyncReadAll().execute(reader).get();
             rawList.remove(0);  //remove giberish headers
@@ -63,6 +67,12 @@ public class PreviousWinners {
 
             for (String[] line : rawList) {
                 winList.add(new WinObject(line));
+
+                List<Integer> temp = new ArrayList<>();
+                for (String number : Arrays.asList(line).subList(2, 8)) {
+                    temp.add(Integer.parseInt(number));
+                }
+                winSerials.add(temp);
             }
 
             this.winList = winList;
